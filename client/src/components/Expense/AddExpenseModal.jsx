@@ -5,8 +5,8 @@ import moment from "moment";
 import useExpenseTracker from "../../context/useExpenseTracker";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-import { clearError } from "../../slices/userSlice";
-import { createExpense } from "../../slices/expenseSlice";
+
+import { clearError, createExpense } from "../../slices/expenseSlice";
 const AddExpenseModal = ({ open, onClose }) => {
   const [formData, setFormData] = useState({
     description: "",

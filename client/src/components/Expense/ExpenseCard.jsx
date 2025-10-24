@@ -5,8 +5,10 @@ import { MdDelete, MdEdit } from "react-icons/md";
 import EditExpenseModal from "./EditExpenseModal";
 import { useDispatch,  } from "react-redux";
 import { deleteExpense } from "../../slices/expenseSlice";
+import { useState } from "react";
 
 const ExpenseCard = ({expenses, onExpenseDeleted}) => {
+    const [openEditModal, setOpenEditModal] = useState(false);
   const dispatch =useDispatch() 
   const handleDelete =async(id)=>{
     if(window.confirm('Are you sure you wanted to delete this ?')){
@@ -14,9 +16,10 @@ const ExpenseCard = ({expenses, onExpenseDeleted}) => {
      onExpenseDeleted()
     }
   }
-  return (
+  return (<>
+  openEditModal && <EditExpenseModal  onClose={()=>setOpenEditModal(false)} />
     <div className="w-full bg-white rounded-md my-6 ">
-      
+    
       <h1 className="font-bold text-xl text-center p-3">Tables of All Incomes</h1>
       <table className="w-full p-3 mt-4 mx-3 overflow-x-auto">
         <thead>
@@ -43,7 +46,7 @@ const ExpenseCard = ({expenses, onExpenseDeleted}) => {
           </tbody>
         ))}
       </table>
-    </div>
+    </div></>
   );
 };
 
