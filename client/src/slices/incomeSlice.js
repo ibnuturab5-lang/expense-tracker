@@ -1,7 +1,8 @@
-import {createAsyncThunk} from '@reduxjs/toolkit'
+import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
 import axiosInstance from '../utils/axiosInstance'
 const initialState={
     incomes:[],
+    last30DaysIncomes:[],
     income:{},
     error:null,
     loading:false,
@@ -26,11 +27,11 @@ export const getAllIncomes =createAsyncThunk("income/getAllIncomes", async (_, {
     }
 });
 // Async thunk to get Incomes for the last 60 days
-export const getLast60DaysIncomes = createAsyncThunk(
-  'income/getLast60DaysIncomes',
+export const getLast30DaysIncomes = createAsyncThunk(
+  'income/getLast30DaysIncomes',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axiosInstance.get('/api/incomes/last60DaysIncome');
+      const response = await axiosInstance.get('/api/incomes/last30DaysIncome');
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -115,16 +116,16 @@ const incomeSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
-      // Handle getLast60DaysIncomes lifecycle
-      .addCase(getLast60DaysIncomes.pending, (state) => {
+      // Handle getLast30DaysIncomes lifecycle
+      .addCase(getLast30DaysIncomes.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(getLast60DaysIncomes.fulfilled, (state, action) => {
+      .addCase(getLast30DaysIncomes.fulfilled, (state, action) => {
         state.loading = false;
-        state.last60DaysIncomes = action.payload;
+        state.last30DaysIncomes = action.payload;
       })
-      .addCase(getLast60DaysIncomes.rejected, (state, action) => {
+      .addCase(getLast30DaysIncomes.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       })

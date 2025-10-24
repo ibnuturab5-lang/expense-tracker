@@ -1,7 +1,8 @@
-import {createAsyncThunk} from '@reduxjs/toolkit'
+import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
 import axiosInstance from '../utils/axiosInstance'
 const initialState={
     expenses:[],
+    last60DaysExpenses:[],
     expense:{},
     error:null,
     loading:false,
