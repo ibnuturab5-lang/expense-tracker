@@ -11,7 +11,9 @@ const IncomeCard = ({item}) => {
     const navigate=useNavigate()
    const dispatch =useDispatch()
    const handleDelete =(id)=>{
-    dispatch(deleteIncome(id))
+  if(window.confirm('Are you sure you want to delete this ?')){
+      dispatch(deleteIncome(id))
+  }
    }
   return (
     <div>
@@ -22,7 +24,7 @@ const IncomeCard = ({item}) => {
                 <MdOutlinePayment/>
               </div>
               <div>
-                <h1 className='font-bold pl-2 '>{item.source}</h1>
+                <h1 className='font-bold max-sm:text-sm  pl-2 '>{item.source}</h1>
                 <p className='text-slate-500 text-xs px-2 leading-3'>{moment(item.date).format("YYYY-MM-DD")}</p>
               </div>
               </div>

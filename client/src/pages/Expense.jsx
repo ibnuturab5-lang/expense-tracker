@@ -44,7 +44,7 @@ const Expense = () => {
     
       {open && <AddExpenseModal onClose={() => setOpen(false)} />}
         </div>
-       {last60DaysExpenses.length >0  && <div className="h-[450px] bg-white w-full p-3 rounded-md">
+       {last60DaysExpenses.length >0  && <div className="h-96 sm:h-[450px] bg-white max-sm:w-[310px] p-3 rounded-md">
           <h1 className="font-bold text-xl ">Last 60 days Expense Overview</h1>
           <ExpenseBarChart expenseData={last60DaysExpenses} />
         </div>}

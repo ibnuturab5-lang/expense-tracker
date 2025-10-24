@@ -22,8 +22,8 @@ const Income = () => {
   }, [dispatch]);
 
   const navigate = useNavigate();
-  const handleOpen = () => {
-    setOpen(!open);
+  const handleOpenIncome = () => {
+    setOpenIncomeModel(!open);
   };
 
   if (error)
@@ -36,21 +36,23 @@ const Income = () => {
   return (
     <DashboardLayout activeMenu={"Income"}>
       <div className=" px-3 sm:px-6  rounded-md  mx-auto w-full ">
-        <div className="flex items-center justify-between py-4">
-          <h1 className="py-2 font-bold"></h1>
-          <button
-            onClick={handleOpen}
-            className="px-2 py-1  rounded-md bg-purple-600 text-slate-50 hover:bg-purple-700 flex items-center justify-between text-sm"
-          >
-            Add Income
-          </button>
+         <div>
+        
+        <button
+          onClick={() => setOpen(!open)}
+          className="px-2 py-1.5 mb-4 text-slate-100 bg-purple-600 rounded-md hover:bg-purple-800 "
+        >
+          Add Income
+        </button>
+    
+      {open && <AddIncomeModal onClose={() => setOpen(false)} />}
         </div>
-        {open && <AddIncomeModal open={open} onClose={() => setOpen(false)} />}
+     
 
        
           <>
             {last30DaysIncomes.length > 0 && (
-              <div className="my-4 h-[450px]  w-full bg-white p-2 rounded-md z-20">
+              <div className="my-4 h-96 sm:h-[450px]  w-full bg-white p-2 rounded-md z-20">
                 <h1 className="font-bold text-xl p-3">
                   Last 30 Days Income Overview
                 </h1>

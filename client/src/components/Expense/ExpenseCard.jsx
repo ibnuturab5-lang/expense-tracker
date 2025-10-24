@@ -2,13 +2,13 @@ import moment from "moment";
 
 import { MdDelete, MdEdit } from "react-icons/md";
 
-import EditExpenseModal from "./EditExpenseModal";
+
 import { useDispatch,  } from "react-redux";
 import { deleteExpense } from "../../slices/expenseSlice";
 import { useState } from "react";
 
 const ExpenseCard = ({expenses, onExpenseDeleted}) => {
-    const [openEditModal, setOpenEditModal] = useState(false);
+  
   const dispatch =useDispatch() 
   const handleDelete =async(id)=>{
     if(window.confirm('Are you sure you wanted to delete this ?')){
@@ -16,12 +16,13 @@ const ExpenseCard = ({expenses, onExpenseDeleted}) => {
      onExpenseDeleted()
     }
   }
-  return (<>
-  openEditModal && <EditExpenseModal  onClose={()=>setOpenEditModal(false)} />
-    <div className="w-full bg-white rounded-md my-6 ">
+  return (
+  
+    <div className="max-sm:w-[310px] bg-white rounded-md my-6 ">
     
       <h1 className="font-bold text-xl text-center p-3">Tables of All Incomes</h1>
-      <table className="w-full p-3 mt-4 mx-3 overflow-x-auto">
+     <div className=" overflow-x-auto ">
+       <table className=" min-w-full border border-collapse mt-4 mx-3  ">
         <thead>
           <tr className=" ">
             <th className="px-4 py-2 border ">Category</th>
@@ -38,7 +39,7 @@ const ExpenseCard = ({expenses, onExpenseDeleted}) => {
                 {moment(expense.date).format("YYYY-MM-DD")}
               </td>
               <td className="px-4 py-2 border">{expense.amount}</td>
-              <td className="px-4 py-2 border flex items-center justify-center gap-4">
+              <td className="px-4 py-2  flex items-center justify-center gap-4">
                 <MdEdit className="text-blue-600 cursor-pointer" />{" "}
                 <MdDelete className="text-red-600 cursor-pointer" onClick={()=>handleDelete(expense._id)}/>
               </td>
@@ -46,7 +47,8 @@ const ExpenseCard = ({expenses, onExpenseDeleted}) => {
           </tbody>
         ))}
       </table>
-    </div></>
+     </div>
+    </div>
   );
 };
 

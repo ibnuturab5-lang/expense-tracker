@@ -8,7 +8,7 @@ const IncomeBarChart = ({incomeData}) => {
   }));
   return (
     <div className='h-full w-full mt-8'>
-<ResponsiveContainer width="100%" height="80%">
+<ResponsiveContainer width="100%" height="70%">
       <BarChart
         width={400}
         height={300}

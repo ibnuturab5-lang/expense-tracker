@@ -7,8 +7,6 @@ import PrivateRoutes from "./components/PrivateRoutes";
  import Income from "./pages/Income";
  import Expense from "./pages/Expense";
 
-// import { ToastContainer } from "react-toastify";
-import EditIncomeModal from "./components/Income/EditIncomeModal";
 
 const App = () => {
   return (

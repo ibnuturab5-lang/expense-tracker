@@ -51,7 +51,7 @@ const Dashboard = () => {
   if (loading)
     return (
       <DashboardLayout activeMenu={"Dashboard"}>
-       <div className="flex items-center justify-center h-screen">
+       <div className="flex items-center justify-center h-96">
          <Loader/>
        </div>
       </DashboardLayout>

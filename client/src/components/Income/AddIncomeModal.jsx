@@ -20,6 +20,7 @@ const AddIncomeModal = ({open, onClose}) => {
         e.preventDefault();
        dispatch(createIncome(formData))
        setFormData({source:'', description:'',amount:'',date:''})
+       onClose()
     }
   return (
     <div className='fixed inset-0 flex items-center justify-center  bg-slate-800/50 backdrop-blur-sm z-50'>
