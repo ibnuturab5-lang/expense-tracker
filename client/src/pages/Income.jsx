@@ -25,12 +25,6 @@ const Income = () => {
   const handleOpen = () => {
     setOpen(!open);
   };
-  if (loading)
-    return (
-      <DashboardLayout activeMenu={"Income"}>
-        <Loader />
-      </DashboardLayout>
-    );
 
   if (error)
     return (
@@ -53,9 +47,7 @@ const Income = () => {
         </div>
         {open && <AddIncomeModal open={open} onClose={() => setOpen(false)} />}
 
-        {loading ? (
-          <Loader />
-        ) : (
+       
           <>
             {last30DaysIncomes.length > 0 && (
               <div className="my-4 h-[450px]  w-full bg-white p-2 rounded-md z-20">
@@ -80,7 +72,7 @@ const Income = () => {
               )}
             </div>
           </>
-        )}
+       
       </div>
     </DashboardLayout>
   );

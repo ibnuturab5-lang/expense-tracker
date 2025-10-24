@@ -3,10 +3,11 @@ import { MdClose } from 'react-icons/md'
 import useExpenseTracker from '../../context/useExpenseTracker'
 import moment from 'moment'
 import { toast } from 'react-toastify'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { createIncome } from '../../slices/incomeSlice'
 const AddIncomeModal = ({open, onClose}) => {
   const dispatch =useDispatch()
+  const {loading,error} =useSelector(state=>state.income)
   const [formData,setFormData]=useState({
     source:'', description:'',amount:'',date:''
   })
@@ -38,7 +39,7 @@ const AddIncomeModal = ({open, onClose}) => {
                 </div>
                 <div className='mb-4'>
                     <label htmlFor="Date" className='block mb-2'>Date</label>
-                    <input type="date" placeholder='' className='px-4 py-2 w-full rounded-md bg-slate-300 'name='date' value={form.date} onChange={handleChange} />
+                    <input type="date" placeholder='' className='px-4 py-2 w-full rounded-md bg-slate-300 'name='date' value={formData.date} onChange={handleChange} />
                 </div>
                 <button disabled={loading} className='px-5 py-2 rounded-md bg-purple-600 text-slate-200 w-full mt-4 disabled:bg-purple-400 ' type='submit'>{loading ?'adding...':"Add Income"}</button>
             </form>

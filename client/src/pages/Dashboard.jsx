@@ -51,7 +51,9 @@ const Dashboard = () => {
   if (loading)
     return (
       <DashboardLayout activeMenu={"Dashboard"}>
-        <Loader/>
+       <div className="flex items-center justify-center h-screen">
+         <Loader/>
+       </div>
       </DashboardLayout>
     );
 
@@ -102,7 +104,7 @@ const Dashboard = () => {
               <BarChart totalExpense={totalExpense} totalIncome={totalIncome} />
             </div>
           )}
-          {expenses.length === 0 ? (
+          {expenses.length === 0 && incomes.length === 0? (
             <div className="flex flex-col  items-center justify-center  h-96 gap-10 w-full ">
               <p className="capitalize text-2xl">
                 Welcome{" "}

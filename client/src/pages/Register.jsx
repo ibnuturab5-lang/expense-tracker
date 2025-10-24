@@ -3,6 +3,7 @@ import {Link, useNavigate} from 'react-router-dom'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { clearError, registerUser } from '../slices/userSlice'
+import { useEffect } from 'react'
 const Register = () => {
     const [fullName, setFullName] =useState('')
     const [email, setEmail] =useState('')
