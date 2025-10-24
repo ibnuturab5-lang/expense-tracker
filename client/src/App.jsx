@@ -6,16 +6,15 @@ import Dashboard from "./pages/Dashboard";
 import PrivateRoutes from "./components/PrivateRoutes";
 import Income from "./pages/Income";
 import Expense from "./pages/Expense";
-import { AuthProvider } from "./context/AuthContext";
-import { AppProvider } from "./context/AppContext";
+import {Provider} from 'react-redux'
 
-import { ToastContainer } from "react-toastify";
+// import { ToastContainer } from "react-toastify";
 import EditIncomeModal from "./components/Income/EditIncomeModal";
+import { store } from "./store/store";
 const App = () => {
   return (
     <BrowserRouter>
-      <AuthProvider>
-        <AppProvider>
+    <Provider store={store}>   
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
@@ -52,21 +51,8 @@ const App = () => {
               }
             />
           </Routes>
-          <ToastContainer
-            position="top-right"
-            autoClose={3000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick={false}
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="light"
-          
-          />
-        </AppProvider>
-      </AuthProvider>
+         
+      </Provider> 
     </BrowserRouter>
   );
 };
