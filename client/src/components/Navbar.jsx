@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import useAuth from "../context/useAuth";
 import { useNavigate } from "react-router-dom";
 import { SIDEBAR_ITEMS } from "../utils/data";
-import { MdClose, MdDashboard, MdHome, MdMenu } from "react-icons/md";
+import { MdClose,  MdMenu } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutUser } from "../slices/userSlice";
 
 const Navbar = ({activeMenu}) => {
-  const { user, logout } = useAuth();
+    const {user}=useSelector((state)=>state.user)
   const navigate = useNavigate();
+  const dispatch =useDispatch()
   const [open,setOpen]=useState(false)
 const handleClick =(route)=>{
         if(route === '/login'){
@@ -16,7 +19,7 @@ const handleClick =(route)=>{
         navigate(route)
     }
   const handleLogout = async () => {
-    await logout();
+    dispatch(logoutUser())
     navigate("/login");
   };
   return (

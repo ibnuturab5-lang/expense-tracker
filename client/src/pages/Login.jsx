@@ -1,32 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { clearError, loginUser } from "../slices/userSlice";
 
-import useAuth from "../context/useAuth";
-
-import { toast } from "react-toastify";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const { login } = useAuth();
+ const {user,loading, error}=useSelector((state)=>state.user)
+
   const navigate= useNavigate()
+  const dispatch= useDispatch()
   const handleSubmit = async (e) => {
     e.preventDefault();
-   
-    setError("");
-    setLoading(true);
-    try {
-      await login(email, password);
-      toast.success('Login in successfully!')
-      navigate('/')
-    } catch (error) {
-      console.log(error);
-      toast.error(error || 'failed to login');
-    } finally {
-      setLoading(false);
-    }
+    dispatch(clearError())
+    dispatch(loginUser({email,password}))
+
   };
+  useEffect(()=>{
+    if(user){
+      navigate('/')
+    }
+  },[user,navigate])
   return (
     <div className="flex items-center justify-center h-screen ">
       <div className="p-4 bg-white rounded-md w-[80%] md:w-[40%] shadow-2xl">
@@ -57,6 +51,7 @@ const Login = () => {
               onChange={(e)=>setPassword(e.target.value)}
             />
           </div>
+          {error && <p className="text-red-600 text-sm p-3">{error.message}</p>}
           <button
             type="submit"
             className="px-4 py-2 w-full text-gray-100 bg-blue-600 hover:bg-blue-700 rounded-md"
@@ -64,7 +59,7 @@ const Login = () => {
             {loading ? 'logging':"Login"}
           </button>
           <p className="text-sm text-slate-600 p-3">
-            Dont have an account ?{" "}
+            Don't have an account ?{" "}
             <Link
               className="ml-3 decoration-black text-purple-500"
               to={"/register"}

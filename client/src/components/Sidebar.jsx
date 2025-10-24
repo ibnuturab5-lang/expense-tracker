@@ -1,11 +1,14 @@
-import React from 'react'
+
 import { SIDEBAR_ITEMS } from '../utils/data'
 import { useNavigate } from 'react-router-dom'
-import useAuth from '../context/useAuth'
+
+import { useDispatch, useSelector } from 'react-redux'
+import { logoutUser } from '../slices/userSlice'
 
 const Sidebar = ({activeMenu}) => {
     const navigate=useNavigate()
-    const {user,logout}=useAuth()
+    const dispatch =useDispatch()
+    const {user}=useSelector((state)=>state.user)
     const handleClick =(route)=>{
         if(route === '/login'){
             handleLogout()
@@ -13,10 +16,9 @@ const Sidebar = ({activeMenu}) => {
         }
         navigate(route)
     }
-    const handleLogout=async()=>{
-        await logout()
+    const handleLogout=()=>{
+        dispatch(logoutUser())
         navigate('/login')
-
     }
   return (
     <div className=' hidden sm:flex sm:flex-col  sm:w-48  h-screen fixed p-3 bg-white border-r border-slate-300 rounded-md'>
