@@ -6,11 +6,12 @@ import EditExpenseModal from "./EditExpenseModal";
 import { useDispatch,  } from "react-redux";
 import { deleteExpense } from "../../slices/expenseSlice";
 
-const ExpenseCard = ({expenses}) => {
+const ExpenseCard = ({expenses, onExpenseDeleted}) => {
   const dispatch =useDispatch() 
-  const handleDelete =(id)=>{
+  const handleDelete =async(id)=>{
     if(window.confirm('Are you sure you wanted to delete this ?')){
-      dispatch(deleteExpense(id))
+     await dispatch(deleteExpense(id)).unwrap();
+     onExpenseDeleted()
     }
   }
   return (

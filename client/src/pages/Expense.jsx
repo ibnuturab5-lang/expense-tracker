@@ -15,14 +15,11 @@ const Expense = () => {
     dispatch(getLast60DaysExpenses())
     dispatch(getAllExpenses())
   },[dispatch])
-
+  const refetchLast60DaysExpenses = () => {
+       dispatch(getLast60DaysExpenses());
+     };
   const [open, setOpen] = useState(false);
- if (loading)
-      return (
-        <DashboardLayout activeMenu={"Expense"}>
-          <Loader/>
-        </DashboardLayout>
-      );
+ 
   
     if (error)
       return (
@@ -53,7 +50,7 @@ const Expense = () => {
         {expenses.length === 0 ? (
           <p className="text-slate-500 p-3">No expenses is found!</p>
         ) : (
-          <ExpenseCard expenses={expenses} onClose={()=>setOpen(false)} />
+          <ExpenseCard expenses={expenses} onExpenseDeleted={refetchLast60DaysExpenses} onClose={()=>setOpen(false)} />
         )}
       </div>
     </DashboardLayout>
