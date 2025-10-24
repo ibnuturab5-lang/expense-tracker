@@ -178,7 +178,7 @@ const Dashboard = () => {
             </div>
           )}
 
-          {incomes.length > 0 && (
+          {last30DaysIncomes.length > 0 && (
             <div className="my-4 h-[450px]  w-full bg-white p-2 rounded-md z-20">
               <h1 className="font-bold text-xl p-3">
                 Last 30 Days Income Overview

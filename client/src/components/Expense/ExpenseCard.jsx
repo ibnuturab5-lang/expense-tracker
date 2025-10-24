@@ -1,11 +1,18 @@
 import moment from "moment";
-import React from "react";
+
 import { MdDelete, MdEdit } from "react-icons/md";
-import useExpenseTracker from "../../context/useExpenseTracker";
+
 import EditExpenseModal from "./EditExpenseModal";
+import { useDispatch,  } from "react-redux";
+import { deleteExpense } from "../../slices/expenseSlice";
 
 const ExpenseCard = ({expenses}) => {
-  const {deleteExpense}=useExpenseTracker()  
+  const dispatch =useDispatch() 
+  const handleDelete =(id)=>{
+    if(window.confirm('Are you sure you wanted to delete this ?')){
+      dispatch(deleteExpense(id))
+    }
+  }
   return (
     <div className="w-full bg-white rounded-md my-6 ">
       
@@ -28,8 +35,8 @@ const ExpenseCard = ({expenses}) => {
               </td>
               <td className="px-4 py-2 border">{expense.amount}</td>
               <td className="px-4 py-2 border flex items-center justify-center gap-4">
-                <MdEdit className="text-blue-600" />{" "}
-                <MdDelete className="text-red-600" onClick={()=>deleteExpense(expense._id)}/>
+                <MdEdit className="text-blue-600 cursor-pointer" />{" "}
+                <MdDelete className="text-red-600 cursor-pointer" onClick={()=>handleDelete(expense._id)}/>
               </td>
             </tr>
           </tbody>

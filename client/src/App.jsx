@@ -4,8 +4,8 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import PrivateRoutes from "./components/PrivateRoutes";
-// import Income from "./pages/Income";
-// import Expense from "./pages/Expense";
+ import Income from "./pages/Income";
+ import Expense from "./pages/Expense";
 
 // import { ToastContainer } from "react-toastify";
 import EditIncomeModal from "./components/Income/EditIncomeModal";
@@ -24,7 +24,7 @@ const App = () => {
             </PrivateRoutes>
           }
         />
-        {/* <Route
+        <Route
           path="/income"
           element={
             <PrivateRoutes>
@@ -32,14 +32,14 @@ const App = () => {
             </PrivateRoutes>
           }
         />
-        <Route
+        {/* <Route
           path="/income/:id"
           element={
             <PrivateRoutes>
               <EditIncomeModal />
             </PrivateRoutes>
           }
-        />
+        /> */}
         <Route
           path="/expense"
           element={
@@ -47,7 +47,7 @@ const App = () => {
               <Expense />
             </PrivateRoutes>
           }
-        /> */}
+        />
       </Routes>
     </BrowserRouter>
   );

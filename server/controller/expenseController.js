@@ -85,8 +85,8 @@ export const updateExpense = async (req, res) => {
     expense.source = source || expense.source;
     expense.description = description || expense.description;
     expense.date = date || expense.date;
-    const updatedexpense = await expense.save();
-    return res.status(201).json(updatedexpense);
+    const updatedExpense = await expense.save();
+    return res.status(201).json(updatedExpense);
   } catch (error) {
     console.log(error.message);
     return res

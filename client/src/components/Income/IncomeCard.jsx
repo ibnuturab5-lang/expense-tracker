@@ -4,10 +4,15 @@ import { MdDelete, MdEdit, MdOutlinePayment, MdTrendingUp } from 'react-icons/md
 import { useNavigate } from 'react-router-dom'
 import useExpenseTracker from '../../context/useExpenseTracker'
 import { toast } from 'react-toastify'
+import { useDispatch } from 'react-redux'
+import { deleteIncome } from '../../slices/incomeSlice'
 
 const IncomeCard = ({item}) => {
     const navigate=useNavigate()
-    const {deleteIncome}=useExpenseTracker()
+   const dispatch =useDispatch()
+   const handleDelete =(id)=>{
+    dispatch(deleteIncome(id))
+   }
   return (
     <div>
         <li  className='flex items-center justify-between'>
@@ -25,7 +30,7 @@ const IncomeCard = ({item}) => {
              <div className='flex items-center gap-3'>
                <button className='px-3 py-1.5 bg-green-50 text-green-600 rounded-md flex items-center gap-2  max-sm:
                text-sm '>+${item.amount}<MdTrendingUp/></button>  
-              <MdDelete className='text-red-600 cursor-pointer ' onClick={()=>{deleteIncome(item._id); toast.success('income deleted!')}}/>  <MdEdit className='text-blue-600 cursor-pointer ' onClick={()=>navigate(`/income/${item._id}`)}/> </div>        
+              <MdDelete className='text-red-600 cursor-pointer ' onClick={()=>handleDelete(item._id)}/>  <MdEdit className='text-blue-600 cursor-pointer ' onClick={()=>navigate(`/income/${item._id}`)}/> </div>        
                        
 
             </li>

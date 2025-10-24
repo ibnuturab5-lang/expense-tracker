@@ -1,15 +1,35 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DashboardLayout from "../components/DashboardLayout";
-import useExpenseTracker from "../context/useExpenseTracker";
 import ExpenseBarChart from "../components/Expense/ExpenseBarChart";
 import ExpenseCard from "../components/Expense/ExpenseCard";
 import AddExpenseModal from "../components/Expense/AddExpenseModal";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllExpenses, getLast60DaysExpenses } from "../slices/expenseSlice";
+import Loader from "../components/Loader";
 
 
 const Expense = () => {
-  const { last60DaysExpenses, expenses } = useExpenseTracker();
-  const [open, setOpen] = useState(false);
+  const dispatch =useDispatch()
+  const { last60DaysExpenses, expenses,loading,error } = useSelector((state)=>state.expense);
+  useEffect(()=>{
+    dispatch(getLast60DaysExpenses())
+    dispatch(getAllExpenses())
+  },[dispatch])
 
+  const [open, setOpen] = useState(false);
+ if (loading)
+      return (
+        <DashboardLayout activeMenu={"Expense"}>
+          <Loader/>
+        </DashboardLayout>
+      );
+  
+    if (error)
+      return (
+        <DashboardLayout activeMenu={"Expense"}>
+          <p className="text-red-600 text-sm p-3">Error: {error.message}</p>;
+        </DashboardLayout>
+      );
   return (
     <DashboardLayout activeMenu={"Expense"}>
       
@@ -19,14 +39,14 @@ const Expense = () => {
         
         <button
           onClick={() => setOpen(!open)}
-          className="px-2 py-1.5 mb-4 text-slate-100 bg-purple-600 rounded-md hover:bg-purple-800"
+          className="px-2 py-1.5 mb-4 text-slate-100 bg-purple-600 rounded-md hover:bg-purple-800 "
         >
           Add Expense
         </button>
     
       {open && <AddExpenseModal onClose={() => setOpen(false)} />}
         </div>
-       {expenses.length >0  && <div className="h-[450px] bg-white w-full p-3 rounded-md">
+       {last60DaysExpenses.length >0  && <div className="h-[450px] bg-white w-full p-3 rounded-md">
           <h1 className="font-bold text-xl ">Last 60 days Expense Overview</h1>
           <ExpenseBarChart expenseData={last60DaysExpenses} />
         </div>}
